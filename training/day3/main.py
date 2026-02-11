@@ -1,5 +1,6 @@
 # Importing libraries
 import pandas as pd
+import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split  # Corrected deprecated import
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from sklearn.linear_model import LinearRegression
@@ -38,3 +39,18 @@ print(y_pred)
 # Displaying the actual values for comparison
 print("Actual values of the test set:")
 print(Y_test)
+
+# Step 7: Graph - Predicted vs Actual (side by side)
+x = range(len(Y_test))
+width = 0.35
+plt.figure(figsize=(10, 6))
+plt.bar([i - width/2 for i in x], Y_test, width, color='blue', label='Actual Profit')
+plt.bar([i + width/2 for i in x], y_pred, width, color='red', label='Predicted Profit')
+plt.xlabel('Startup (Test Set Index)')
+plt.ylabel('Profit ($)')
+plt.title('Actual vs Predicted Profit')
+plt.xticks(list(x))
+plt.legend()
+plt.tight_layout()
+plt.savefig('actual_vs_predicted.png')
+plt.show()
